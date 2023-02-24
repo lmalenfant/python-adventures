@@ -125,6 +125,7 @@ def replay():
 
 import os
 clear = lambda: os.system('cls') #on Windows System
+#clear = lambda: os.system('clear') #on Linux
 template_grid = [[1, 2, 3], [4, 5,6], [7,8, 9]]
 keep_playing = True
 while keep_playing:
