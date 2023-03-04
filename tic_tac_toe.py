@@ -174,42 +174,43 @@ def clear():
     return os.system('cls') #on Windows System
     #return os.system('clear') #on Linux
 
-template_grid = [[1, 2, 3], [4, 5,6], [7,8, 9]]
-KEEP_PLAYING = True
-while KEEP_PLAYING:
-    clear()
-    print('Welcome to TIC TAC TOE!')
-    GAME_IN_PROGRESS = True
-    FULL_BOARD = False
-    game_grid = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+if __name__ == '__main__':
+    template_grid = [[1, 2, 3], [4, 5,6], [7,8, 9]]
+    KEEP_PLAYING = True
+    while KEEP_PLAYING:
+        clear()
+        print('Welcome to TIC TAC TOE!')
+        GAME_IN_PROGRESS = True
+        FULL_BOARD = False
+        game_grid = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
 
-    #Let player 1 select O or X
-    PLAYER = player_selection()
+        #Let player 1 select O or X
+        PLAYER = player_selection()
 
-    while GAME_IN_PROGRESS:
-        #check to see if the board is full
-        if check_full_board(game_grid):
-            print('Nobody wins this one!')
-            FULL_BOARD = True
-            GAME_IN_PROGRESS = False
-        else:
-            print_board(template_grid)
-
-            POSITION = position_selection(PLAYER)
-            while not check_position(game_grid, POSITION) and not FULL_BOARD:
-                print('That position is already filled please select another')
-                POSITION = position_selection(PLAYER)
-
-            clear()
-            WIN = write_value(game_grid, POSITION, PLAYER)
-            if WIN:
-                print(f'Congratulations {PLAYER}! You win')
+        while GAME_IN_PROGRESS:
+            #check to see if the board is full
+            if check_full_board(game_grid):
+                print('Nobody wins this one!')
+                FULL_BOARD = True
                 GAME_IN_PROGRESS = False
             else:
-                #next player
-                if PLAYER == 'X':
-                    PLAYER = 'O'
-                else:
-                    PLAYER = 'X'
+                print_board(template_grid)
 
-    KEEP_PLAYING = replay()
+                POSITION = position_selection(PLAYER)
+                while not check_position(game_grid, POSITION) and not FULL_BOARD:
+                    print('That position is already filled please select another')
+                    POSITION = position_selection(PLAYER)
+
+                clear()
+                WIN = write_value(game_grid, POSITION, PLAYER)
+                if WIN:
+                    print(f'Congratulations {PLAYER}! You win')
+                    GAME_IN_PROGRESS = False
+                else:
+                    #next player
+                    if PLAYER == 'X':
+                        PLAYER = 'O'
+                    else:
+                        PLAYER = 'X'
+
+        KEEP_PLAYING = replay()
